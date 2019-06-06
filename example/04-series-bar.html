@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="main" style="width: 800px;height:800px;"></div>
+	</body>
+
+</html>
+<script src="js/echarts.min.js"></script>
+
+<script type="text/javascript">
+	var myCharts = echarts.init(document.querySelector("#main"))
+	var barLabel = { //图形上的文本标签，可用于说明图形的一些数据信息
+			show: true,
+			position: 'insideBottom',
+			distance: 5, //距离图形元素的距离
+			offset: [0, 0], //标签的位置。 position: [10, 10],
+			formatter: '{a}\n{c}',
+			rotate: 0,
+			color: '#fff', //宽、高、边框等样式
+		},
+		option = {
+			title: {
+
+			},
+			xAxis: {
+				type: 'category',
+				axisTick: {
+					show: false
+				},
+				data: ['2012', '2013', '2014', '2015', '2016']
+			},
+			yAxis: {
+				type: 'value'
+			},
+			tooltip: {
+
+			},
+			legend: {
+				data: ['A', 'B', 'C', 'D']
+			},
+			series: [{
+					type: 'bar',
+					name: 'A',
+					data: [320, 332, 301, 334, 390],
+					legendHoverLink: true, //是否启用图例 hover 时的联动高亮。
+					label: barLabel,
+					itemStyle: { //图形样式。
+						//					color: ,
+						borderColor: '#000',
+						borderWidth: 5,
+						borderType: 'solid',
+					},
+					emphasis: { //高亮样式
+						label: { //图形上的文本标签，可用于说明图形的一些数据信息
+							show: true,
+							position: 'inside',
+							distance: 5,
+							//					rotate: ...,
+							offset: [0, 0], //标签的位置。
+							formatter: '{a}\n{c}',
+							color: 'yellow', //宽、高、边框等样式
+						},
+						itemStyle: { //图形样式。
+							color: 'blue',
+							borderColor: '#000',
+							borderWidth: 5,
+							borderType: 'solid',
+						},
+					},
+					cursor: 'pointer',
+					barWidth: 30, //柱条的宽度，不设时自适应。支持设置成相对于类目宽度的百分比。
+					barMaxWidth: 500, //柱条的最大宽度，不设时自适应。支持设置成相对于类目宽度的百分比。
+					barMinHeight: 0, //柱条最小高度，可用于防止某数据项的值过小而影响交互。
+					barGap: 0, //不同系列的柱间距离
+					barCategoryGap: 100, //同一系列的柱间距离，默认为类目间距的20%，可设固定值
+					large: false, //是否开启大数据量优化，在数据图形特别多而出现卡顿时候可以开启。 缺点：优化后不能自定义设置单个数据项的样式。
+					largeThreshold: 400, //开启绘制优化的阈值。
+					progressive: 3000, //渐进式渲染时每一帧绘制图形数量，
+					progressiveThreshold: 4000, //启用渐进式渲染的图形数量阈值，在单个系列的图形数量超过该阈值时启用渐进式渲染。
+					progressiveChunkMode: 'sequential',
+					/*
+					 分片的方式。可选值：
+					 *  'mod': 取模分片，即每个片段中的点会遍布于整个数据，从而能够视觉上均匀得渲染。
+					 *  'sequential': 按照数据的顺序分片。缺点是渲染过程不自然。
+					 * */
+
+					seriesLayoutBy: 'row', // 当使用 dataset 时，seriesLayoutBy 指定了 dataset 中用行还是列对应到系列上，也就是说，系列“排布”到 dataset 的行还是列上。可取值： column row
+					datasetIndex: 2, //如果 series.data 没有指定，并且 dataset 存在，那么就会使用 dataset。datasetIndex 指定本系列使用那个 dataset。
+				},
+				{
+					name: 'B',
+					type: 'bar',
+					barGap: 0, //不同系列的柱间距离
+					barCategoryGap: 50, //同一系列的柱间距离，默认为类目间距的20%，可设固定值
+					label: barLabel,
+					barWidth: 30, //柱条的宽度，不设时自适应。支持设置成相对于类目宽度的百分比。
+					data: [220, 182, 191, 234, 290]
+				},
+				{
+					name: 'C',
+					type: 'bar',
+					barGap: 0, //不同系列的柱间距离
+					barCategoryGap: 50, //同一系列的柱间距离，默认为类目间距的20%，可设固定值
+					label: barLabel,
+					barWidth: 30, //柱条的宽度，不设时自适应。支持设置成相对于类目宽度的百分比。
+					data: [150, 232, 201, 154, 190]
+				},
+				{
+					name: 'D',
+					type: 'bar',
+					barGap: 0, //不同系列的柱间距离
+					barWidth: 30, //柱条的宽度，不设时自适应。支持设置成相对于类目宽度的百分比。
+					barCategoryGap: 50, //同一系列的柱间距离，默认为类目间距的20%，可设固定值
+					label: barLabel,
+					data: [98, 77, 101, 99, 40]
+				}
+			]
+		};
+
+	myCharts.setOption(option)
+</script>

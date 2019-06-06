@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="main" style="width: 500px;height: 500px;"></div>
+	</body>
+
+</html>
+<script src="js/echarts.min.js"></script>
+
+<script type="text/javascript">
+	var myCharts = echarts.init(document.querySelector("#main"))
+
+	var option = {
+		title: {
+			text: '案例二'
+		},
+		grid: {
+			show: false
+		},
+		xAxis: {
+			show: true,
+			position: 'bottom', //x 轴的位置。 top bottom
+			offset: 0, //X 轴相对于默认位置的偏移
+			type: 'category',
+			/* 'value' 数值轴，适用于连续数据。  
+			 * 'category' 类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据。
+			 * ' time' 时间轴，适用于连续的时序数据，与数值轴相比时间轴带有时间的格式化，在刻度计算上也有所不同，例如会根据跨度的范围来决定使用月，星期，日还是小时范围的刻度。
+			 * 'log' 对数轴。适用于对数数据。
+			 * */
+			name: "123456",
+			nameLocation: 'center', // 'start' 'middle' 或者 'center' 'end'
+			nameTextStyle: {
+				color: "#000000"
+			},
+			nameGap: 50, // 坐标轴名称与轴线之间的距离。
+			nameRotate: 0, //坐标轴名字旋转，角度值。
+			inverse: false, // 是否是反向坐标轴 默认false
+			boundaryGap: [20,20], 
+			/*
+			 * 坐标轴两边留白策略，类目轴和非类目轴的设置和表现不一样。
+			 * 类目轴中 boundaryGap 可以配置为 true 和 false。默认为 true，这时候刻度只是作为分隔线，标签和数据点都会在两个刻度之间的带(band)中间。
+			 * 非类目轴，包括时间，数值，对数轴，boundaryGap是一个两个值的数组，分别表示数据最小值和最大值的延伸范围，可以直接设置数值或者相对的百分比，
+			 * 在设置 min 和 max 后无效。
+			 * */ 
+			min: function(value) { //坐标轴刻度最小值。
+
+				return 0;
+			}, //坐标轴刻度最小值。
+			max: function(value) { //坐标轴刻度最大值。类目轴 0,1,2代表 类1 类2 类3
+				return 5;
+			}, // 坐标轴刻度最大值。
+
+			minInterval: 0, //自动计算的坐标轴最小间隔大小。例如可以设置成1保证坐标轴分割刻度显示成整数。只在数值轴或时间轴中（type: 'value' 或 'time'）有效。
+			maxInterval: 10, // 自动计算的坐标轴最大间隔大小。 例如，在时间轴（（type: 'time'））可以设置成 3600 * 24 * 1000 保证坐标轴分割刻度最大为一天。 只在数值轴或时间轴中（type: 'value' 或 'time'）有效。
+			axisLine: { //坐标轴线 
+				show: true, //是否显示坐标轴轴线。
+				onZero: true, //X 轴或者 Y 轴的轴线是否在另一个轴的 0 刻度上，只有在另一个轴为数值轴且包含 0 刻度时有效。
+				symbol:  'arrow', //轴线两边的箭头。可以是字符串，表示两端使用同样的箭头；或者长度为 2 的字符串数组，分别表示两端的箭头。默认不显示箭头，即 'none'。两端都显示箭头可以设置为 'arrow'，只在末端显示箭头可以设置为 ['none', 'arrow']。
+				symbolSize: [10, 10], //轴线两边的箭头的大小，第一个数字表示宽度（垂直坐标轴方向），第二个数字表示高度（平行坐标轴方向）。
+				symbolOffset: [10,10],
+				lineStyle: {
+					color: '#333',
+					width: 1,
+					type: 'solid', //'solid'  'dashed'  'dotted'，
+					opacity: 1
+				}
+			},
+			axisTick: { //axisTick坐标轴刻度相关设置。
+				show: true,
+				inside: true, //坐标轴刻度是否朝内，默认朝外。
+				length: 5, //坐标轴刻度的长度(高度)。 
+				lineStyle: {
+					color: '#333',
+					width: 3,
+					type: 'solid', //'solid'  'dashed'  'dotted',
+					opacity: 1
+				}
+			},
+			splitLine: {  //坐标轴在 grid 区域中的分隔线。
+				show: true,
+				interval: 'auto',
+				lineStyle: {
+					color: '#666',
+					width: 1,
+					type: 'dotted', //'solid'  'dashed'  'dotted',
+					opacity: 1
+				}
+			},
+			axisPointer: {
+				show: true,
+				type: 'line',
+				snap: false, //坐标轴指示器是否自动吸附到点上。默认自动判断
+				handle: {
+					show: false, //手柄的尺寸，可以设置单值，如 45，也可以设置为数组：[width, height]。
+					size: 45, 
+				}
+			},
+			data: [
+				0.2, 1.5, 2.4, 3.6, 4.1, 5.0
+			]
+		},
+		yAxis: {
+			show: true
+		},
+		series: [{
+			name: "利率",
+			type: 'line',
+			data: [
+				1, 2, 5, 9, 5, 7
+			]
+
+		}]
+
+	}
+
+	myCharts.setOption(option)
+</script>
