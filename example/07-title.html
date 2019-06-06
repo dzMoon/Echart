@@ -1,9 +1,117 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
 	</head>
+
 	<body>
+		<div id="main" style="width:500px;height:500px"></div>
 	</body>
+
 </html>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript">
+	var myCharts = echarts.init(document.querySelector("#main"))
+
+	var option = {
+		title: {
+			show: true,
+			text: '深圳月最低生活费组成（单位:元）', //主标题文本，支持使用 \n 换行。
+			link: 'http://baidu.com', //主标题文本超链接。
+			target: 'blank', //指定窗口打开主标题超链接。 'self' 当前窗口打开  'blank' 新窗口打开
+			textStyle: {
+				color: '#000',
+				fontSize: 18,
+				fontWeight: 'bold',
+				align: 'center'
+			},
+			subtext: 'From ExcelHome', //副标题文本，支持使用 \n 换行。
+			sublink: 'http://e.weibo.com/1341556070/AjQH99che', ////副标题文本超链接。
+			subtarget: 'blank', ////指定窗口打开副标题超链接。 'self' 当前窗口打开  'blank' 新窗口打开
+			subtextStyle: {
+				color: 'blue',
+				fontSize: 14,
+				align: 'center',
+				verticalAlign: 'middle', //top bottom middle
+				fontWeight: 'lighter'
+			},
+			textAlign: 'center', //整体（包括 text 和 subtext）的水平对齐。
+			textVerticalAlign: 'auto', //整体（包括 text 和 subtext）的垂直对齐。
+			triggerEvent: true, //是否触发事件。
+			padding: 5, //标题内边距，单位px，默认各方向内边距为5，接受数组分别设定上右下左边距。
+			itemGap: 30, //主副标题之间的间距。
+			zlevel: 0,
+			z: 3,
+			left: 250,
+			top: 20,
+			right: 100,
+			//			bottom: 'auto',
+			backgroundColor: 'transparent',
+			borderColor: '#ccc',
+			borderWidth: 0,
+			borderRadius: 0,
+			shadowBlur: '5',
+			shadowColor: 'rgba(0,0,0,.5)',
+			shadowOffsetX: 0,
+			shadowOffsetY: 0,
+		},
+		tooltip: {
+			trigger: 'axis',
+			axisPointer: { // 坐标轴指示器，坐标轴触发有效
+				type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
+			},
+			formatter: function(params) {
+				var tar = params[1];
+				return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value;
+			}
+		},
+		grid: {
+			left: '3%',
+			right: '4%',
+			top: 150,
+			containLabel: true
+		},
+		xAxis: {
+			type: 'category',
+			splitLine: {
+				show: false
+			},
+			data: ['总费用', '房租', '水电费', '交通费', '伙食费', '日用品数']
+		},
+		yAxis: {
+			type: 'value'
+		},
+		series: [{
+				name: '辅助',
+				type: 'bar',
+				stack: '总量',
+				itemStyle: {
+					barBorderColor: 'rgba(0,0,0,0)',
+					color: 'rgba(0,0,0,0)'
+				},
+				emphasis: {
+					itemStyle: {
+						barBorderColor: 'rgba(0,0,0,0)',
+						color: 'rgba(0,0,0,1)'
+					}
+				},
+				data: [0, 1700, 1400, 1200, 300, 0]
+			},
+			{
+				name: '生活费',
+				type: 'bar',
+				stack: '总量',
+				label: {
+					normal: {
+						show: true,
+						position: 'inside'
+					}
+				},
+				data: [2900, 1200, 300, 200, 900, 300]
+			}
+		]
+	}
+	myCharts.setOption(option)
+</script>

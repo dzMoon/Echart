@@ -50,6 +50,7 @@
 					data: [320, 332, 301, 334, 390],
 					legendHoverLink: true, //是否启用图例 hover 时的联动高亮。
 					label: barLabel,
+					stack: 'cate',//数据堆叠，同个类目轴上系列配置相同的stack值可以堆叠放置。
 					itemStyle: { //图形样式。
 						//					color: ,
 						borderColor: '#000',
@@ -99,6 +100,7 @@
 					barGap: 0, //不同系列的柱间距离
 					barCategoryGap: 50, //同一系列的柱间距离，默认为类目间距的20%，可设固定值
 					label: barLabel,
+//					stack: 'cate',
 					barWidth: 30, //柱条的宽度，不设时自适应。支持设置成相对于类目宽度的百分比。
 					data: [220, 182, 191, 234, 290]
 				},
@@ -108,12 +110,14 @@
 					barGap: 0, //不同系列的柱间距离
 					barCategoryGap: 50, //同一系列的柱间距离，默认为类目间距的20%，可设固定值
 					label: barLabel,
+//					stack: 'cate',
 					barWidth: 30, //柱条的宽度，不设时自适应。支持设置成相对于类目宽度的百分比。
 					data: [150, 232, 201, 154, 190]
 				},
 				{
 					name: 'D',
 					type: 'bar',
+//					stack: 'cate',
 					barGap: 0, //不同系列的柱间距离
 					barWidth: 30, //柱条的宽度，不设时自适应。支持设置成相对于类目宽度的百分比。
 					barCategoryGap: 50, //同一系列的柱间距离，默认为类目间距的20%，可设固定值
