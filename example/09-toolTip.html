@@ -29,7 +29,7 @@
 	option = {
 		tooltip: {
 			show: true, //是否显示提示框组件，包括提示框浮层和 axisPointer。
-			trigger: 'item', // 
+			trigger: 'axis', // 
 			/**
 			 * 触发类型。
 			 * 'item' 数据项图形触发，主要在散点图，饼图等无类目轴的图表中使用。
@@ -37,7 +37,7 @@
 			 * 'none' 什么都不触发。
 			 */
 			axisPointer: {
-				type: 'line',
+				type: 'shadow',
 				/**
 				 * 指示器类型。
 				 * 'line' 直线指示器
@@ -47,7 +47,7 @@
 				 * */
 
 				snap: true, //坐标轴指示器是否自动吸附到点上。默认自动判断。
-				z: 5, //标轴指示器的 z 值。控制图形的前后顺序。z值小的图形会被z值大的图形覆盖。
+				z: 10, //标轴指示器的 z 值。控制图形的前后顺序。z值小的图形会被z值大的图形覆盖。
 				label: { //坐标轴指示器的文本标签。
 					show: false,
 					precision: 'auto', //文本标签中数值的小数点精度。默认根据当前轴的值自动判断。也可以指定如 2 表示保留两位小数。
@@ -116,14 +116,19 @@
 			 * 'mousemove|click' 同时鼠标移动和点击时触发。
 			 * 'none' 不在 'mousemove' 或 'click' 时触发，用户可以通过 action.tooltip.showTip 和 action.tooltip.hideTip 来手动触发和隐藏。也可以通过 axisPointer.handle 来触发或隐藏。
 			 * */
-			showDelay: 0, //浮层显示的延迟，单位为 ms
+			showDelay: 100, //浮层显示的延迟，单位为 ms
 			hideDelay: 100, //浮层隐藏的延迟，单位为 ms
-			enterable: false, //鼠标是否可进入提示框浮层中，默认为false，如需详情内交互，如添加链接，按钮，可设置为 true。
+			enterable: true, //鼠标是否可进入提示框浮层中，默认为false，如需详情内交互，如添加链接，按钮，可设置为 true。
 			renderMode: 'html', // 浮层的渲染模式，默认以 'html 即额外的 DOM 节点展示 tooltip；此外还可以设置为 'richText' 表示以富文本的形式渲染，渲染的结果在图表对应的 Canvas 中（目前 SVG 尚未支持富文本），这对于一些没有 DOM 的环境（如微信小程序）有更好的支持。
 			confine: false, //是否将 tooltip 框限制在图表的区域内。
-			transitionDuration: 0.4, //提示框浮层的移动动画过渡时间，单位是 s，设置为 0 的时候会紧跟着鼠标移动。
-			position: ['50%', '50%'], //提示框浮层的位置，默认不设置时位置会跟随鼠标的位置。
-			formatter: null,
+			transitionDuration: 0, //提示框浮层的移动动画过渡时间，单位是 s，设置为 0 的时候会紧跟着鼠标移动。
+			//			position: ['50%', '50%'], //提示框浮层的位置，默认不设置时位置会跟随鼠标的位置。
+			formatter: function(params) {
+//				return params[0].seriesName
+				return "<div style='width: auto;text-align:center'><p>" + params[0].seriesName + "</p><p>" + params[0].axisValue+"</p><p>"+params[0].data+ "</p></div>"
+			},
+
+			//			'{a}\n{b}\n{c}',
 			/**
 			 *  提示框浮层内容格式器，支持字符串模板和回调函数两种形式。
 			 *  1, 字符串模板
@@ -134,56 +139,58 @@
 			 *     饼图、仪表盘、漏斗图: {a}（系列名称），{b}（数据项名称），{c}（数值）, {d}（百分比）
 			 *  2, 回调函数
 			 *     2.1 第一个参数 params 是 formatter 需要的数据集。格式如下  (params: Object|Array, ticket: string, callback: (ticket: string, html: string)) => string
-			*      {
-			*		    componentType: 'series',
-			*		    // 系列类型
-			*		    seriesType: string,
-			*		    // 系列在传入的 option.series 中的 index
-			*		    seriesIndex: number,
-			*		    // 系列名称
-			*		    seriesName: string,
-			*		    // 数据名，类目名
-			*		    name: string,
-			*		    // 数据在传入的 data 数组中的 index
-			*		    dataIndex: number,
-			*		    // 传入的原始数据项
-			*		    data: Object,
-			*		    // 传入的数据值
-			*		    value: number|Array,
-			*		    // 数据图形的颜色
-			*		    color: string,
-			*		
-			*		    // 饼图的百分比
-			*		    percent: number,
-			*	
-			*	    }
-			*		2.2 在 trigger 为 'axis' 的时候，或者 tooltip 被 axisPointer 触发的时候，params 是多个系列的数据数组。其中每项内容格式同上，并且，
-			*		
-			*		{
-			*		    componentType: 'series',
-			*		    // 系列类型
-			*		    seriesType: string,
-			*		    // 系列在传入的 option.series 中的 index
-			*		    seriesIndex: number,
-			*		    // 系列名称
-			*		    seriesName: string,
-			*		    // 数据名，类目名
-			*		    name: string,
-			*		    // 数据在传入的 data 数组中的 index
-			*		    dataIndex: number,
-			*		    // 传入的原始数据项
-			*		    data: Object,
-			*		    // 传入的数据值
-			*		    value: number|Array,
-			*		    // 数据图形的颜色
-			*		    color: string,
-			*		}
+			 *      {
+			 *		    componentType: 'series',
+			 *		    // 系列类型
+			 *		    seriesType: string,
+			 *		    // 系列在传入的 option.series 中的 index
+			 *		    seriesIndex: number,
+			 *		    // 系列名称
+			 *		    seriesName: string,
+			 *		    // 数据名，类目名
+			 *		    name: string,
+			 *		    // 数据在传入的 data 数组中的 index
+			 *		    dataIndex: number,
+			 *		    // 传入的原始数据项
+			 *		    data: Object,
+			 *		    // 传入的数据值
+			 *		    value: number|Array,
+			 *		    // 数据图形的颜色
+			 *		    color: string,
+			 *		
+			 *		    // 饼图的百分比
+			 *		    percent: number,
+			 *	
+			 *	    }
+			 *		2.2 在 trigger 为 'axis' 的时候，或者 tooltip 被 axisPointer 触发的时候，params 是多个系列的数据数组。其中每项内容格式同上，并且，
+			 *		
+			 *		{
+			 *		    componentType: 'series',
+			 *		    // 系列类型
+			 *		    seriesType: string,
+			 *		    // 系列在传入的 option.series 中的 index
+			 *		    seriesIndex: number,
+			 *		    // 系列名称
+			 *		    seriesName: string,
+			 *		    // 数据名，类目名
+			 *		    name: string,
+			 *		    // 数据在传入的 data 数组中的 index
+			 *		    dataIndex: number,
+			 *		    // 传入的原始数据项
+			 *		    data: Object,
+			 *		    // 传入的数据值
+			 *		    value: number|Array,
+			 *		    // 数据图形的颜色
+			 *		    color: string,
+			 *		}
 			 * */
-			backgroundColor: 'rgba(50,50,50,0.7)', //提示框浮层的背景颜色。
-			borderColor: '# 333 ', //提示框浮层的边框颜色
+			backgroundColor: 'blue', //提示框浮层的背景颜色。
+			borderColor: '#333 ', //提示框浮层的边框颜色
 			borderWidth: 0, //提示框浮层的边框宽。
-			padding: 5,
-			textStyle: {},
+			padding: 10,
+			textStyle: {
+				color: '#fff'
+			},
 			extraCssText: '', //额外附加到浮层的 css 样式。如下为浮层添加阴影的示例： extraCssText: 'box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);'
 		},
 		title: {
@@ -203,7 +210,7 @@
 			name: '模拟数据',
 			type: 'line',
 			smooth: true,
-			symbol: 'none',
+			//			symbol: 'none',
 			sampling: 'average',
 			itemStyle: {
 				color: 'rgb(255, 70, 131)'

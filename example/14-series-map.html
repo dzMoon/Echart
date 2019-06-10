@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+
+	<head>
+		<meta charset="utf-8">
+	</head>
+
+	<body style="height: 100%; margin: 0">
+		<div id="container" style="height: 100%"></div>
+	</body>
+</html>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<script type="text/javascript">
+	var myChart = echarts.init(document.querySelector("#container"));
+	option = {
+		title: {
+			text: 'iphone销量',
+			subtext: '纯属虚构',
+			left: 'center'
+		},
+		tooltip: {
+			trigger: 'item'
+		},
+		visualMap: {
+			min: 0,
+			max: 2500,
+			left: 'left',
+			top: 'bottom',
+			text: ['高', '低'], // 文本，默认为数值文本
+			calculable: true
+		},
+		lenged: {
+			show: true
+		},
+		series: [{
+			name: 'iphone', //系列名称，用于tooltip的显示，legend 的图例筛选
+			type: 'map',
+			map: 'china', //地图类型。 china world
+			roam: true, //是否开启鼠标缩放和平移漫游。默认不开启。如果只想要开启缩放或者平移，可以设置成 'scale' 或者 'move'。设置成 true 为都开启
+			aspectScale: 0.75, //这个参数用于 scale 地图的长宽比。
+			boundingCoords: null,
+			/**
+			 * 二维数组，定义定位的左上角以及右下角分别所对应的经纬度
+			 * 例: 世界地图经纬度
+			 * [ [-180, 90],[180, -90] ]
+			 * [ 定位左上角经纬度, 定位右下角经纬度]
+			 * */
+			zoom: 1, //当前视角的缩放比例。
+			scaleLimit: {//滚轮缩放的极限控制，通过min, max最小和最大的缩放值，默认的缩放为1。
+				min: 0.5,
+				max: 2
+			}, 
+			nameMap: {//自定义地区的名称映射，如：
+				'china': '中国'
+			}, 
+			selectedMode: true, //选中模式，表示是否支持多个选中，默认关闭，支持布尔值和字符串，字符串取值可选'single'表示单选，或者'multiple'表示多选。
+			label: {
+				show: false,
+				position: 'insideRight',
+				/**
+				 * 标签的位置。
+				 * 绝对的像素值  position: [10, 10],
+				 * 相对的百分比   position: ['50%', '50%']
+				 * 'top'
+				 * 'left'
+				 * 'right'
+				 * 'bottom'
+				 * 'inside'
+				 * 'insideLeft'
+				 * 'insideRight'
+				 * 'insideTop'
+				 * 'insideBottom'
+				 * 'insideTopLeft'
+				 * 'insideBottomLeft'
+				 * 'insideTopRight'
+				 * 'insideBottomRight'
+				 * */
+				distance: 5, //距离图形元素的距离。当 position 为字符描述值（如 'top'、'insideRight'）时候有效。
+				rotate: 0,
+				offset: [30, -40], //是否对文字进行偏移。默认不偏移。例如：[30, 40] 表示文字在横向上偏移 30，纵向上偏移 40。
+				formatter: '{b}{c}',
+			},
+			itemStyle: { //地图区域的颜色。
+				areaColor: '#eee',
+				//color: 自适应,
+				borderColor: '#000',
+				borderWidth: 0,
+				borderType: 'solid',
+				shadowBlur: 0,
+				shadowColor: '#000',
+				shadowOffsetX: 0,
+				shadowOffsetY: 0,
+				opacity: 1,
+			},
+			emphasis: {
+				label: {
+					color: '#fff'
+				},
+				itemStyle: {
+					color: 'yellow'
+				}
+			},
+			zlevel: 0,
+			z: 2,
+			left: 'auto',
+			top: 'auto',
+			right: 'auto',
+			bottom: 'auto',
+			layoutCenter: ['50%','50%'], //在使用 left/right/top/bottom/width/height 的时候，可能很难在保持地图高宽比的情况下把地图放在某个盒形区域的正中间，并且保证不超出盒形的范围。此时可以通过 layoutCenter 属性定义地图中心在屏幕中的位置，layoutSize 定义地图的大小。如下示例
+			layoutSize: '80%', //地图的大小
+			mapValueCalculation: 'sum',
+			/**
+			 * 多个拥有相同地图类型的系列会使用同一个地图展现，如果多个系列都在同一个区域有值，ECharts 会对这些值统计得到一个数据。
+			 * 'sum' 取和。
+			 * 'average' 取平均值。
+			 * 'max' 取最大值。
+			 * 'min' 取最小值。
+			 * */
+			showLegendSymbol: true, //在图例相应区域显示图例的颜色标识（系列标识的小圆点），存在 legend 组件时生效。
+			seriesLayoutBy: 'column',
+			/**
+			 * 当使用 dataset 时，seriesLayoutBy 指定了 dataset 中用行还是列对应到系列上，也就是说，系列“排布”到 dataset 的行还是列上。可取值：
+			 * 'column'：默认，dataset 的列对应于系列，从而 dataset 中每一列是一个维度（dimension）。
+			 * 'row'：dataset 的行对应于系列，从而 dataset 中每一行是一个维度（dimension）。
+			 * */
+
+			data: [{
+					name: '北京',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '天津',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '上海',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '重庆',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '河北',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '河南',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '云南',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '辽宁',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '黑龙江',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '湖南',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '安徽',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '山东',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '新疆',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '江苏',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '浙江',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '江西',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '湖北',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '广西',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '甘肃',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '山西',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '内蒙古',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '陕西',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '吉林',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '福建',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '贵州',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '广东',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '青海',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '西藏',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '四川',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '宁夏',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '海南',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '台湾',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '香港',
+					value: Math.round(Math.random() * 1000)
+				},
+				{
+					name: '澳门',
+					value: Math.round(Math.random() * 1000)
+				}
+			]
+		}]
+	};;
+
+	myChart.setOption(option, true);
+</script>

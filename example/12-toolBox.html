@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="main" style="width:600px;height:600px"></div>
+	</body>
+
+</html>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript">
+	var myChart = echarts.init(document.querySelector("#main"))
+
+	option = {
+
+		title: {
+			text: '未来一周气温变化',
+			subtext: '纯属虚构'
+		},
+		tooltip: {
+			trigger: 'axis'
+		},
+		legend: {
+			data: ['最高气温', '最低气温']
+		},
+		xAxis: {
+			type: 'category',
+			boundaryGap: false,
+			data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+		},
+		yAxis: {
+			type: 'value',
+			axisLabel: {
+				formatter: '{value} °C'
+			}
+		},
+		toolbox: {
+			show: true,
+			orient: 'horizontal', //工具栏 icon 的布局朝向。 'vertical'
+			itemSize: 15, //工具栏 icon 的大小。
+			itemGap: 10, //工具栏 icon 每项之间的间隔。横向布局时为水平间隔，纵向布局时为纵向间隔。
+			showTitle: true, //是否在鼠标 hover 的时候显示每个工具 icon 的标题。
+			feature: {
+				dataZoom: { //数据区域缩放。目前只支持直角坐标系的缩放。
+					show: true,
+					title: { //缩放和还原的标题文本。
+						zoom: '区域缩放',
+						back: '区域缩放还原',
+					},
+					//icon: ,
+					iconStyle: {},
+					emphasis: {},
+					xAxisIndex: 0, //指定哪些 xAxis 被控制。如果缺省则控制所有的x轴。如果设置为 false 则不控制任何x轴。如果设置成 3 则控制 axisIndex 为 3 的x轴。如果设置为 [0, 3] 则控制 axisIndex 为 0 和 3 的x轴。
+					yAxisIndex: 0,
+				},
+				dataView: {
+					show: true,
+					title: '数据视图',
+					//icon: ,
+					iconStyle: { //数据视图 icon 样式设置。
+					},
+					emphasis: { //高亮
+					},
+					readOnly: false, //是否不可编辑（只读）
+					lang: ['数据视图', '关闭', '刷新'], //数据视图上有三个话术，默认是['数据视图', '关闭', '刷新']。
+					backgroundColor: '#fff', //数据视图浮层背景色。
+					textareaColor: '#fff', //数据视图浮层文本输入区背景色。
+					textareaBorderColor: '#333', //数据视图浮层文本输入区边框颜色。
+					textColor: '#000', //文本颜色。
+					buttonColor: '#c23531', //按钮颜色。
+					buttonTextColor: '#fff' //按钮文本颜色。
+				},
+				magicType: { //动态类型切换 
+					show: true, //是否显示该工具。
+					type: ['line', 'bar', 'stack', 'tiled'],
+					/**
+					 * 启用的动态类型
+					 * 'line'（切换为折线图）
+					 * 'bar'（切换为柱状图）
+					 * 'stack'（切换为堆叠模式）
+					 * 'tiled'（切换为平铺模式）。
+					 * */
+					title: { //各个类型的标题文本，可以分别配置。
+						line: '切换为折线图',
+						bar: '切换为柱状图',
+						stack: '切换为堆叠',
+						tiled: '切换为平铺',
+					},
+					icon: { //各个类型的 icon path，可以分别配置。
+					},
+					iconStyle: {},
+					emphasis: {},
+					option: { //各个类型的专有配置项。在切换到某类型的时候会合并相应的配置项。
+//						line: {},
+//						bar: {},
+//						stack: {},
+//						tiled: {},
+					},
+					seriesIndex: {
+//						line: [],
+//						bar: [],
+//						stack: [],
+//						tiled: [],
+					},
+				},
+				restore: {
+					show: true,
+					title: '还原',
+					//icon: '', 
+					iconStyle: { //还原 icon 样式设置。
+					},
+					emphasis: {
+						iconStyle: {}
+					},
+				},
+				saveAsImage: {
+					type: 'png', //保存的图片格式。支持 'png' 和 'jpeg'。
+					name: '', //保存的文件名称，默认使用 title.text 作为名称。
+					backgroundColor: 'auto',
+					excludeComponents: ['toolbox'], //保存为图片时忽略的组件列表，默认忽略工具栏。
+					show: true, //是否显示该工具。
+					title: '保存为图片',
+					//icon: ,
+					iconStyle: {}, //保存为图片 icon 样式设置。
+					emphasis: {
+						iconStyle: {},
+					},
+					pixelRatio: 1, //保存图片的分辨率比例，默认跟容器相同大小，如果需要保存更高分辨率的，可以设置为大于 1 的值，例如 2。
+				},
+			}
+		},
+		series: [{
+				name: '最高气温',
+				type: 'line',
+				data: [11, 11, 15, 13, 12, 13, 10],
+				markPoint: {
+					data: [{
+							type: 'max',
+							name: '最大值'
+						},
+						{
+							type: 'min',
+							name: '最小值'
+						}
+					]
+				},
+				markLine: {
+					data: [{
+						type: 'average',
+						name: '平均值'
+					}]
+				}
+			},
+			{
+				name: '最低气温',
+				type: 'line',
+				data: [1, -2, 2, 5, 3, 2, 0],
+				markPoint: {
+					data: [{
+						name: '周最低',
+						value: -2,
+						xAxis: 1,
+						yAxis: -1.5
+					}]
+				},
+				markLine: {
+					data: [{
+							type: 'average',
+							name: '平均值'
+						},
+						[{
+							symbol: 'none',
+							x: '90%',
+							yAxis: 'max'
+						}, {
+							symbol: 'circle',
+							label: {
+								normal: {
+									position: 'start',
+									formatter: '最大值'
+								}
+							},
+							type: 'max',
+							name: '最高点'
+						}]
+					]
+				}
+			}
+		]
+	};
+	myChart.setOption(option)
+</script>

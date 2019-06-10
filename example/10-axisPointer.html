@@ -1,0 +1,141 @@
+<html>
+
+	<head>
+		<title></title>
+		<meta charset="UTF-8">
+	</head>
+
+	<body>
+		<div id="main" style="width:500px;height:500px"></div>
+	</body>
+
+</html>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript">
+	var myChart = echarts.init(document.querySelector("#main"))
+	var colors = ['#5793f3', '#d14a61', '#675bba'];
+	option = {
+		color: colors,
+		title: {
+			text: 'axisPointer示例'
+		},
+		tooltip: {
+			show: false,
+			trigger: 'axis',
+			axisPointer: {
+				type: 'cross'
+			}
+		},
+		legend: {
+			data: ['2016 降水量']
+		},
+		grid: {
+			top: 70,
+			bottom: 50
+		},
+		xAxis: [{
+			type: 'category',
+			data: ["2016-1", "2016-2", "2016-3", "2016-4", "2016-5", "2016-6", "2016-7", "2016-8", "2016-9", "2016-10", "2016-11", "2016-12"]
+		}],
+		axisPointer: {
+			/**
+			 * 全局与toolTip的区别：  
+			 * type：只有三种 shadow line none
+			 * toolTip中层级高于全局
+			 * 无trigger属性
+			 *
+			 *
+			 */
+			show: true, //默认不显示。
+			type: 'shadow',
+			/**
+			 * 指示器类型。
+			 * 'line' 直线指示器
+			 * 'shadow' 阴影指示器
+			 * 'none' 无指示器
+			 * */
+			snap: true, //坐标轴指示器是否自动吸附到点上。默认自动判断。
+			z: 10, //标轴指示器的 z 值。控制图形的前后顺序。z值小的图形会被z值大的图形覆盖。
+			label: { //坐标轴指示器的文本标签。
+				show: true,
+				precision: 'auto', //文本标签中数值的小数点精度。默认根据当前轴的值自动判断。也可以指定如 2 表示保留两位小数。
+				formatter: null,
+				margin: 3,
+				color: '#fff',
+				fontStyle: 'normal',
+				fontWeight: 'normal',
+				fontFamily: 'sans-serif',
+				fontSize: 12,
+				lineHeight: 'auto',
+				width: 100,
+				height: 60,
+				textBorderColor: 'transparent',
+				textBorderWidth: 0,
+				textShadowColor: 'transparent',
+				textShadowBlur: 0,
+				textShadowOffsetX: 0,
+				textShadowOffsetY: 0,
+				padding: [5, 7, 5, 7],
+				backgroundColor: 'auto',
+				borderColor: null,
+				borderWidth: 0,
+				shadowBlur: 3,
+				shadowColor: '#aaa',
+				shadowOffsetX: 0,
+				shadowOffsetY: 0,
+			},
+			lineStyle: { //axisPointer.type 为 'line' 时有效。
+				color: '#555',
+				width: 1,
+				type: 'solid',
+				shadowBlur: 0,
+				shadowColor: 0,
+				shadowOffsetX: 0,
+				shadowOffsetY: 0,
+				opacity: 1,
+			},
+			shadowStyle: { //axisPointer.type 为 'shadow' 时有效。.
+				color: 'rgba(150,150,150,0.5)',
+				shadowBlur: 0,
+				shadowColor: 0,
+				shadowOffsetX: 0,
+				shadowOffsetY: 0,
+				opacity: 1,
+			},
+			triggerTooltip: false, //是否触发 tooltip。如果不想触发 tooltip 可以关掉。
+			value: 5, //当前的 value。在使用 axisPointer.handle 时，可以设置此值进行初始值设定，从而决定 axisPointer 的初始位置。
+			status: 'hide', //当前的状态，可取值为 'show' 和 'hide'。
+			handle: { //拖拽手柄，适用于触屏的环境
+				show: false, //当 show 设为 true 时开启，这时显示手柄，并且 axisPointer 会一直显示。
+				//icon: ,
+				size: 45,
+				margin: 50, //手柄与轴的距离。注意，这是手柄中心点和轴的距离。
+				color: '#333', //手柄颜色
+				throttle: 40, //手柄拖拽时触发视图更新周期，单位毫秒，调大这个数值可以改善性能，但是降低体验。
+				shadowBlur: 3,
+				shadowColor: '#aaa',
+				shadowOffsetX: 2,
+				shadowOffsetY: 0,
+			},
+			triggerOn: 'mousemove|click',
+			/**
+			 * 提示框触发的条件，可选：
+			 * 'mousemove' 鼠标移动时触发。
+			 * 'click'鼠标点击时触发
+			 * 'mousemove|click' 同时鼠标移动和点击时触发。
+			 * 'none' 不在 'mousemove' 或 'click' 时触发，用户可以通过 action.tooltip.showTip 和 action.tooltip.hideTip 来手动触发和隐藏。也可以通过 axisPointer.handle 来触发或隐藏。
+			 * */
+		},
+		yAxis: [{
+			type: 'value'
+		}],
+		series: [{
+			name: '2016 降水量',
+			type: 'line',
+			smooth: true,
+			data: [3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7]
+		}]
+	};
+
+	myChart.setOption(option);
+</script>
