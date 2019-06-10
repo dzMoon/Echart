@@ -22,9 +22,10 @@
 			formatter: "{a} <br/>{b}: {c} ({d}%)"
 		},
 		legend: {
-			orient: 'vertical',
-			x: 'left',
-			data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+			orient: 'horizontal',
+			x: 'center',
+			data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎'],
+			top: 50
 		},
 		series: [{
 			type: 'pie',
@@ -32,13 +33,13 @@
 			legendHoverLink: true, //是否启用图例 hover 时的联动高亮。
 			hoverAnimation: true, //是否开启 hover 在扇区上的放大动画效果。,与hoverOffset配合使用
 			hoverOffset: 50, //高亮扇区的偏移距离。
-			selectedMode: false, //选中模式，表示是否支持多个选中，默认关闭，支持布尔值和字符串，字符串取值可选'single'，'multiple'，分别表示单选还是多选。
+			selectedMode: 'single', //选中模式，表示是否支持多个选中，默认关闭，支持布尔值和字符串，字符串取值可选'single'，'multiple'，分别表示单选还是多选。
 			selectedOffset: 50, //选中扇区的偏移距离。
 			clockwise: true, //饼图的扇区是否是顺时针排布。
 			startAngle: 90, //起始角度，支持范围[0, 360]。
 			minAngle: 0, //最小的扇区角度（0 ~ 360），用于防止某个值过小导致扇区太小影响交互。
-			minShowLabelAngle: 80, //小于这个角度（0 ~ 360）的扇区，不显示标签（label 和 labelLine）。
-			roseType: 'radius',
+			minShowLabelAngle: 100, //小于这个角度（0 ~ 360）的扇区，不显示标签（label 和 labelLine）。
+			roseType: '',
 			/**
 			 * 是否展示成南丁格尔图，通过半径区分数据大小。可选择两种模式：
 			 *'radius' 扇区圆心角展现数据的百分比，半径展现数据的大小。
@@ -106,7 +107,7 @@
 				emphasis: {
 					show: true,
 					lineStyle: {
-						color: '#000',
+						color: 'blue',
 						width: 1,
 						type: 'solid',
 						opacity: 1,
@@ -116,8 +117,8 @@
 			itemStyle: { //图形样式。
 //				color: '#000', //自适应 背景色
 				borderColor: 'yellow',
-				borderWidth: 10,
-				borderType: 'dotted',
+				borderWidth: 2,
+				borderType: 'solid',
 				opacity: 1,
 			},
 			emphasis: {

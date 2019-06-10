@@ -7,7 +7,7 @@
 	</head>
 
 	<body>
-		<div id="main" style="width: 500px;height: 500px;"></div>
+		<div id="main" style="width: 800px;height: 800px;"></div>
 	</body>
 
 </html>
@@ -27,17 +27,19 @@
 			show: true,
 			data: [
 				1, 2, 3, 4, 5, 6, 7, 8, 9, 10
-			]
+			],
+			boundaryGap: false, 
 		},
 		yAxis: {
 			show: true,
 			splitLine: false,
+			z:3
 		},
 		series: [{
 			name: "利率",
 			type: 'line',
 			coordinateSystem: 'cartesian2d', // cartesian2d 直角坐标系  polar 极坐标系
-			symbol: 'circle',
+			symbol: 'rect',
 			/*
 			 * 标记的图形 
 			 * 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none','emptyCircle'
@@ -50,7 +52,7 @@
 			hoverAnimation: true, //是否开启 hover 在拐点标志上的提示动画效果。
 			legendHoverLink: true, //是否启用图例 hover 时的联动高亮。
 			cursor: 'pointer', //鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 cursor。
-			step: false, // 是否是阶梯线图。可以设置为 true 显示成阶梯线图，也支持设置成 'start', 'middle', 'end' 分别配置在当前点，当前点与下个点的中间点，下个点拐弯。
+			step: true, // 是否是阶梯线图。可以设置为 true 显示成阶梯线图，也支持设置成 'start', 'middle', 'end' 分别配置在当前点，当前点与下个点的中间点，下个点拐弯。
 			label: { //图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等
 				show: true, //是否显示标签。
 				position: 'middle', //标签的位置。
@@ -85,7 +87,7 @@
 						},
 						height: 40
 					},
-					x: {
+					c: {
 						fontSize: 18,
 						fontFamily: 'Microsoft YaHei',
 						borderColor: '#449933',
@@ -100,7 +102,7 @@
 			},
 			lineStyle: { //线条样式。 
 				color: "red",
-				type: 'dotted',
+				type: 'solid',
 				width: 5,
 				opacity: 1,
 			},
@@ -112,7 +114,7 @@
 					x2: 0,
 					y2: 1,
 					colorStops: [{
-							offset:1,
+							offset: 1,
 							color: '#fff'
 						},
 						{
@@ -149,59 +151,56 @@
 			},
 			smooth: true, //是否平滑曲线显示。
 			markPoint: { //图表标注
-				symbol: 'triangle', //标记的图形 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none'
-				symbolSize: 100,
-				symbolRotate: 0, //旋转角度
-				label: { // 标签
-					color: 'orange'
-				},
-				itemStyle: { // 折现该店标志的样式
-				},
-				emphasis: { //图形的高亮样式。
-					itemStyle: { // 标签样式
-
-					},
-					label: { // 折线拐点标志的样式。
-
-					}
-				},
-				data: [],
-			},
-			markLine: { //图表标线。
-				symbol: 'none',
+				symbol: 'pin', //标记的图形 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none'
 				symbolSize: 50,
 				label: { // 标签
-					
+					color: "red"
 				},
 				itemStyle: { // 折现该店标志的样式
+					color: 'green'
 				},
 				emphasis: { //图形的高亮样式。
-					itemStyle: { // 标签样式
+					itemStyle: {// 折线拐点标志的样式。 
 
 					},
-					label: { // 折线拐点标志的样式。
-
+					label: {  // 标签样式
+						color: '#fff'
 					}
 				},
-				data: [],
+				data: [
+                    {type: 'max', name: '最大值'},
+                    {type: 'min', name: '最小值'}
+                ]
 			},
-			markArea: {
+			markLine: { //图表标线。
+				symbol: ['nonde', 'arrow'], //标线两端的标记类型，可以是一个数组分别指定两端，也可以是单个统一指定
+				symbolSize: 10,
 				label: { // 标签
+					color: '#000',
+					formatter: '{b}\n{c}',
+					fontSize: 20
 				},
-				itemStyle: { // 折现该店标志的样式
+				lineStyle: { // 折现该店标志的样式  默认样式如果为dotted,dashed,高亮样式不能改为solid  
+					color: '#000',
+					type: 'solid'
 				},
 				emphasis: { //图形的高亮样式。
-					itemStyle: { // 标签样式
-
+					lineStyle: { //  折线拐点标志的样式。 
+						width: 4,
+						type: 'dotted',
+						color: '#798798'
 					},
-					label: { // 折线拐点标志的样式。
-
+					label: { //标签样式
+						color: '#000'
 					}
 				},
-				data: [],
+				data: [{
+					type: 'average',
+					name: '平均值'
+				}],
 			},
 			tooltip: {
-				
+
 			},
 
 			data: [

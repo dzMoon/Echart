@@ -18,22 +18,25 @@
 
 	var option = {
 		title: {
-			text: '七日年化'
+			text: '七日年化',
+			top: 20,
+			left: 300
 		},
 		tooltip: {
-
+	
 		},
 		legend: {
-
+			top: 60,
+			left: 300
 		},
 		grid: {
 			show: true,
 			zLevel: 0, //优先级高，创建新的canvas
 			z: 0,//优先级低，不创建新的canvas
 			left: 100,
-			top: 30,
+			top: 100,
 			right: 30,
-			right: 10,
+
 			width: '90%',
 			height: 'auto',
 			containLabel: false,//grid 区域是否包含坐标轴的刻度标签。
@@ -41,7 +44,7 @@
 			borderColor: "black",
 			borderWidth: 5,
 			shadowBlur: 5,
-			shadowColor: 'rgba(0,0,0,1)',
+			shadowColor: 'rgba(0,0,0,.5)',
 			shadowOffsetX: 5,
 			shadowOffsetY: 10
 		},
