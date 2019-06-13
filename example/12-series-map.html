@@ -80,7 +80,7 @@
 			nameMap: { //自定义地区的名称映射，如：
 				'china': '中国'
 			},
-			selectedMode: true, //选中模式，表示是否支持多个选中，默认关闭，支持布尔值和字符串，字符串取值可选'single'表示单选，或者'multiple'表示多选。
+			selectedMode: 'multiple', //选中模式，表示是否支持多个选中，默认关闭，支持布尔值和字符串，字符串取值可选'single'表示单选，或者'multiple'表示多选。，如果roam为true，选择失效
 			label: {
 				show: true,
 				position: 'inside',
@@ -104,7 +104,7 @@
 				 * */
 				distance: 5, //距离图形元素的距离。当 position 为字符描述值（如 'top'、'insideRight'）时候有效。
 				rotate: 0,
-				offset: [0, 10], //是否对文字进行偏移。默认不偏移。例如：[30, 40] 表示文字在横向上偏移 30，纵向上偏移 40。
+				offset: [0, 0], //是否对文字进行偏移。默认不偏移。例如：[30, 40] 表示文字在横向上偏移 30，纵向上偏移 40。
 				formatter: '{b}',
 			},
 			itemStyle: { //地图区域的颜色。
