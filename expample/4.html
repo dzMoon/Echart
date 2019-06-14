@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="main"></div>
+	</body>
+
+</html>
+<script src="js/echarts.min.js"></script>
+
+<script type="text/javascript">
+	var myChart = echarts.init(document.querySelector("#main"), 'dark', {
+		width: 500,
+		height: 500
+	})
+
+	var option = {
+		
+		xAxis: {
+			type: 'category',
+			axisTick: {
+				show: false
+			},
+			data: ['2012', '2013', '2014', '2015', '2016']
+		},
+		yAxis: {
+			type: 'value'
+		},
+		
+		legend: {
+			show: true,
+			data: ['系列A', '系列B', '系列C', '系列D']
+		},
+		series: [{
+				name: '系列A',
+				type: 'bar',
+				label: {
+					show: true,
+					position: 'insideBottom',
+				},
+				barMaxWidth: 500,
+				legendHoverLink: false,
+				barMinHeight: 100,
+				//			stack: '数量',
+				barCategoryGap: 0,
+				barGap: 1,
+				barWidth: 10,
+				cursor: 'progress',
+				label: {
+					
+				},
+				itemStyle: {
+					
+				},
+				emphasis: {
+					
+				},
+				data: [90, 232, 201, 154, 190],
+				animation: true,
+				animationDuration: 1000,
+				animationDelay: 1000,
+			},
+			{
+				name: '系列B',
+				type: 'bar',
+				//			stack: '数量',
+				barWidth: 10,
+				barCategoryGap: 0,
+				barGap: 1,
+
+				data: [220, 182, 191, 234, 290]
+			},
+			{
+				name: '系列C',
+				type: 'bar',
+				//			stack: '数量',
+				barWidth: 10,
+				barCategoryGap: 0,
+				barGap: 1,
+
+				data: [320, 332, 301, 334, 390],
+			},
+			{
+				name: '系列D',
+				type: 'bar',
+				//			stack: '数量',
+				barWidth: 10,
+				barCategoryGap: 0,
+				barGap: 1,
+
+				data: [98, 77, 101, 99, 40]
+
+			},
+		]
+	}
+	myChart.setOption(option)
+</script>

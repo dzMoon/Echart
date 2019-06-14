@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+
+	<head>
+		<meta charset="utf-8">
+	</head>
+
+	<body style="height: 100%; margin: 0">
+		<div id="container" style="height: 100%"></div>
+	</body>
+
+</html>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+<script type="text/javascript">
+	var myChart = echarts.init(document.querySelector("#container"));
+	option = {
+		title: {
+			text: 'iphone销量',
+			subtext: '纯属虚构',
+			left: 'center'
+		},
+		legend: {
+			show: true,
+			data: ['iphone']
+		},
+		geo: { //地理坐标系组件用于地图的绘制，支持在地理坐标系上绘制散点图，线集。
+			show: true,
+			type: 'map',
+			map: 'world', //地图类型。 china world
+			roam: false,
+			scalelimit: {
+				min: 0.2,
+				max: 4,
+			},
+//			showLegendSymbol: true, 
+			zoom: 2,
+			layoutCenter: ['50%', '50%'],
+			layoutSize: '50%',
+			label: {
+				show: false,
+			},
+
+			regions: [
+				{
+					name: '新疆',
+					itemStyle: {
+//						color: '#000',
+						areaColor: 'blue',
+					},
+					label: {
+						show: true,
+					}
+				}
+			],
+			selectedMode: 'multiple',
+			itemStyle: {
+				
+			},
+			label: {
+				position: 'inside',
+			}
+		},
+		series: [
+
+
+		]
+	};;
+
+	myChart.setOption(option);
+</script>

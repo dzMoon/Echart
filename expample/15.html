@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+
+	<head>
+		<meta charset="utf-8">
+	</head>
+
+	<body style="height: 100%; margin: 0">
+		<div id="container" style="height: 100%"></div>
+	</body>
+
+</html>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+<script type="text/javascript">
+	var planePath = 'path://M1705.06,1318.313v-89.254l-319.9-221.799l0.073-208.063c0.521-84.662-26.629-121.796-63.961-121.491c-37.332-0.305-64.482,36.829-63.961,121.491l0.073,208.063l-319.9,221.799v89.254l330.343-157.288l12.238,241.308l-134.449,92.931l0.531,42.034l175.125-42.917l175.125,42.917l0.531-42.034l-134.449-92.931l12.238-241.308L1705.06,1318.313z';
+	//[{
+	//	name: '北京',
+	//	value: [116.4551, 40.2539],
+	//},{
+	//	name: '上海',
+	//	value: [121.4648, 31.2891],
+	//},{
+	//	name: '拉萨',
+	//	value: [91.1865, 30.1465],
+	//},{
+	//	name: '成都',
+	//	value: [103.9526, 30.7617],
+	//},{
+	//	name: '广州',
+	//	value: [113.5107, 23.2196],
+	//},{
+	//	name: '西安',
+	//	value: [109.1162, 34.2004],
+	//}]
+	var myChart = echarts.init(document.querySelector("#container"), 'dark');
+	var option = {
+		geo: {
+			type: 'map',
+			map: 'china',
+			itemStyle: {
+				borderColor: '#000',
+				borderWidth: 1,
+				borderTYpe: 'solid',
+				shadowBlur: 2,
+				shadowColor: "#000",
+				areaColor: '#323c48',
+			}
+		},
+		series: [{
+				type: 'lines',
+				coordinateSystem: 'geo',
+				effect: { //线特效的配置
+					show: true, //
+					period: 6, //特效动画的时间，单位为 s。
+					delay: 0, //特效动画的延时，支持设置成数字或者回调。单位ms
+					constantSpeed: 0, //配置特效图形的移动动画是否是固定速度，单位像素/秒，设置为大于 0 的值后会忽略 period 配置项。
+					symbol: planePath, //特效图形的标记。
+					symbolSize: 15, //特效标记的大小
+					color: '#46bee9', //特效标记的颜色
+					trailLength: 0, //特效尾迹的长度。取从 0 到 1 的值，数值越大尾迹越长。
+					loop: true, //是否循环显示特效。
+				},
+				lineStyle: {
+					color: '#46bee9',
+					width: 1,
+					opacity: 0.6,
+					curveness: 0.2 //边的曲度，支持从 0 到 1 的值，值越大曲度越大。
+				},
+				data: [{
+					from: {
+						name: '北京',
+
+					},
+					to: {
+						name: '上海',
+
+					},
+					coords: [
+						[116.4551, 40.2539],
+						[121.4648, 31.2891]
+					]
+				},{
+					from: {
+						name: '北京',
+
+					},
+					to: {
+						name: '拉萨',
+
+					},
+					coords: [
+						[116.4551, 40.2539],
+						[91.1865, 30.1465]
+					]
+				},{
+					from: {
+						name: '北京',
+
+					},
+					to: {
+						name: '成都',
+
+					},
+					coords: [
+						[116.4551, 40.2539],
+						[103.9526, 30.7617]
+					]
+				},{
+					from: {
+						name: '北京',
+
+					},
+					to: {
+						name: '西安',
+
+					},
+					coords: [
+						[116.4551, 40.2539],
+						[109.1162, 34.2004]
+					]
+				},{
+					from: {
+						name: '北京',
+
+					},
+					to: {
+						name: '广州',
+
+					},
+					coords: [
+						[116.4551, 40.2539],
+						[113.5107, 23.2196]
+					]
+				}]
+			}
+
+			, {
+				type: 'effectScatter', //带有涟漪特效动画的散点（气泡）图
+				name: '气泡图',
+				legendHoverLink: true, //是否启用图例 hover 时的联动高亮。
+				effectType: 'ripple', //特效类型，目前只支持涟漪特效'ripple'。
+				showEffectOn: 'render',
+				/**
+				 * 配置何时显示特效。
+				 * 'render' 绘制完成后显示特效。
+				 * 'emphasis' 高亮（hover）的时候显示特效。
+				 * */
+				rippleEffect: {
+					period: 4, //动画的周期，秒数。
+					scale: 3, //动画中波纹的最大缩放比例。
+					brushType: 'stroke', //波纹的绘制方式，可选 'stroke' 和 'fill'。
+				},
+				coordinateSystem: 'geo',
+				/**
+				 * 该系列使用的坐标系
+				 *  'cartesian2d' 使用二维的直角坐标系（也称笛卡尔坐标系）
+				 *  'polar' 使用极坐标系
+				 *  'geo' 使用地理坐标系
+				 * */
+				symbol: 'circle',
+				//				symbol: 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKwAAACsCAYAAADmMUfYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA4RpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1NWM4M2Q1Yi0yMGRlLTRmNDYtOWM2Ni1mNjEzMmVjMjdhNTUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MjhBQ0RDMUE4MTBFMTFFNUJGMkVFRDNDOTQxRTE2MjgiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MjhBQ0RDMTk4MTBFMTFFNUJGMkVFRDNDOTQxRTE2MjgiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6YThiMTZmMzAtNTBiOC1lMDQ4LThlMWQtMWI0N2I0MjNlYmQ3IiBzdFJlZjpkb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6YWM2OWY3NGUtN2UyNi0xMWU1LWFmNDEt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', //标记的图形。 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none'
+				color: '#46bee9',
+				cursor: 'pointer',
+				label: {
+					show: true,
+					formatter: '{b}',
+					color: '#46bee9',
+					position: 'right',
+					distance: 10,
+				},
+				itemStyle: {
+
+				},
+				emphasis: {},
+				data: [{
+					name: '北京',
+					value: [116.4551, 40.2539],
+				}, {
+					name: '上海',
+					value: [121.4648, 31.2891],
+				}, {
+					name: '拉萨',
+					value: [91.1865, 30.1465],
+				}, {
+					name: '成都',
+					value: [103.9526, 30.7617],
+				}, {
+					name: '广州',
+					value: [113.5107, 23.2196],
+				}, {
+					name: '西安',
+					value: [109.1162, 34.2004],
+				}],
+				zlevel: 0,
+				z: 2,
+
+			}
+		]
+
+	}
+
+	myChart.setOption(option);
+</script>

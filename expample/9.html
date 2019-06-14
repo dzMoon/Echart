@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="main"></div>
+		
+	</body>
+
+</html>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript">
+	var myChart = echarts.init(document.querySelector("#main"), 'dark', {
+		width: 500,
+		height: 500,
+
+	});
+
+	var option = {
+
+		xAxis: {
+			type: 'category',
+			boundaryGap: 0,
+			data: [0, 1, 2, 3, 4, 5, 6, 7],
+			width: '100%',
+			height: '100%'
+		},
+		yAxis: {
+			type: 'value'
+		},
+		tooltip: {
+			show: true,
+							formatter: function(params) {
+
+								return "<div class='tips' style='width: 30px;text-align:center'><p>" + params[0].axisIndex + "</p><hr><p>" + params[0].data + "</p></div>"
+
+							},
+							trigger: 'axis',  // item:饼图、散点图    axis坐标轴出发
+							showContent: true,
+							triggerOn: 'mousemove|click',
+							showDelay: 0,
+							hideDelay: 0,
+							transitionDuration: 0,
+							confine: true,
+							enterable: true,
+							borderColor: '#fff',
+							borderWidth: 2,
+							backgroundColor: 'blue',
+							position: ['50%','50%'],
+			alwaysShowContent: true,
+			axisPointer: {
+				show: true,
+				type: 'line', // line  shadow  cross
+				label: {
+					color: 'blue',
+					fontSize: 20,
+					width: 50,
+					height: 50,
+					textBorderColor: 'yellow',
+					padding: 10,
+					textBorderType: 'solid',
+					textBorderWidth: 2,
+					borderColor: 'blue',
+					borderType: 'solid',
+					borderWidth: 2,
+					textShadowBlur: 2,
+				},
+				lineStyle: {
+					type: 'solid',
+					color: 'red'
+				},
+				shadowStyle: {
+					
+				},
+				crossStyle: {
+					
+				}
+			}
+		},
+		series: [{
+			name: '数组',
+			type: 'line',
+			symbol: 'circle',
+			symbolSize: 15,
+			showSymbol: true,
+			hoverAnimation: true,
+			smooth: true,
+			data: [5, 6, 8, 7, 9, 2, 4, 10],
+			toolTip: {
+
+			}
+		}]
+	}
+
+	myChart.setOption(option);
+</script>

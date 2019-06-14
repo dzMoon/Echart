@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="main" style="width:500px;height:500px"></div>
+	</body>
+
+</html>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript">
+	var myChart = echarts.init(document.querySelector("#main"), 'dark', {
+		width: 500,
+		height: 500,
+		render: 'svg'
+	});
+
+	var option = {
+
+		xAxis: {
+			boundaryGap: 0,
+			data: [0, 1, 2, 3, 4, 5, 6]
+		},
+		yAxis: {
+
+		},
+		series: [{
+			name: '数组',
+			type: 'line',
+			symbol: 'rect',
+			symbolSize: 20,
+			showSymbol: true,
+			hoverAnimation: false,
+			lengedHoverLink: true,
+			step: false,
+			smooth: true,
+			label: {
+				show: true,
+				color: 'yellow',
+				offset: 0,
+				formatter:	'{a}\n{b}\n{c}',
+				distance: 20,
+				rotate: 0,
+				alige: 'left',
+				verticalAlign: 'middle',
+				
+			},
+			itemStyle: {
+				show: true,
+				color: 'blue',
+				width: 5,
+				borderWdith: 2,
+				borderColor: 'yellow',
+				borderType: 'dotted'
+			},
+			areaStyle: {
+				color: {
+					x: 0,
+					y: 1,
+					x2: 0,
+					y2: 0,
+					type: 'linear',
+					colorStops: [
+						{
+							offset: 0,
+							color: 'red',
+						},
+						{
+							offset: 0.5,
+							color: '#fff'
+						},
+					]
+				}
+			},
+			lineStyle: {
+				color: 'red',
+				width: 5,
+			},
+			emphasis: {
+				itemStyle: {
+					
+				},
+				label: {
+					
+				}
+			},
+			markPoint: {
+				symbol: 'pin',
+				symbolSize: 50,
+				itemStyle: {
+					
+				},
+				label: {
+					
+				},
+				emphasis: {
+					itemStyle: {
+						color: "yellow"
+					},
+					label: {
+						color: '#fff'
+					}
+				},
+				data: [
+					{type: 'max', name: '最大值'},
+					{type: 'min', name: '最小值'}
+				]
+			},
+			markLine: {
+				symbol: ['none', 'arrow'],
+				lineStyle: {
+					type: 'dashed',
+					width: 4,
+				},
+				emphasis: {
+					lineStyle: { //  折线拐点标志的样式。 
+						width: 4,
+						type: 'solid',
+						color: '#798798'
+					},
+				},
+				data: [
+					{type: 'average', name: '平均值'}
+				]
+			},
+			
+			
+			
+			data: [5, 6, 8, 7, 9, 2, 4, 9]
+		}]
+	}
+
+	myChart.setOption(option);
+</script>
