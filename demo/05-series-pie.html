@@ -14,7 +14,7 @@
 <script src="js/echarts.min.js"></script>
 
 <script type="text/javascript">
-	var myCharts = echarts.init(document.querySelector("#main"))
+	var myCharts = echarts.init(document.querySelector("#main"),'dark')
 
 	option = {
 		tooltip: {
@@ -22,10 +22,19 @@
 			formatter: "{a} <br/>{b}: {c} ({d}%)"
 		},
 		legend: {
+			show: false,
 			orient: 'horizontal',
 			x: 'center',
 			data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎'],
 			top: 50
+		},
+		toolbox: {
+			show: true,
+			feature: {
+				saveAsImage: {
+					type: 'png'
+				}
+			}
 		},
 		series: [{
 			type: 'pie',
@@ -57,11 +66,12 @@
 				 * 'center'在饼图中心位置
 				 * */
 
-				formatter: [
-					'{a| {a}}',
-					'{b| {b}}',
-					'{c| {c}}'
-				].join('\n'),
+				formatter: '{b}',
+//				[
+//					'{a| {a}}',
+//					'{b| {b}}',
+//					'{c| {c}}'
+//				].join('\n'),
 				//'{a}\n{b}\n{c}\n',
 				/*
 				 * 标签内容格式器，支持字符串模板和回调函数两种形式，字符串模板与回调函数返回的字符串均支持用 \n 换行。
@@ -71,27 +81,28 @@
 				 * {@xxx}：数据中名为'xxx'的维度的值，如{@product}表示名为'product'` 的维度的值。
 				 * {@[n]}：数据中维度n的值，如{@[3]}` 表示维度 3 的值，从 0 开始计数。
 				 * */
-				color: 'blue', // 字体颜色、大小、
+				color: '#fff', // 字体颜色、大小、
 				align: "center", //文字水平对齐方式，默认自动。
 				verticalAlign: "middle", //文字垂直对齐方式，默认自动。
-				rich: { //在 rich 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
-					a: {
-						color: 'red',
-						lineHeight: 10
-					},
-					b: {
-						backgroundColor: {
-							image: 'xxx/xxx.jpg'
-						},
-						height: 40
-					},
-					x: {
-						fontSize: 18,
-						fontFamily: 'Microsoft YaHei',
-						borderColor: '#449933',
-						borderRadius: 4
-					},
-				}
+//				rich: { //在 rich 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
+//					a: {
+//						color: 'red',
+//						lineHeight: 10
+//					},
+//					b: {
+//						backgroundColor: {
+//							image: 'xxx/xxx.jpg'
+//						},
+//						color: '#fff',
+//						height: 40
+//					},
+//					x: {
+//						fontSize: 18,
+//						fontFamily: 'Microsoft YaHei',
+//						borderColor: '#449933',
+//						borderRadius: 4
+//					},
+//				}
 			},
 			labelLine: { //标签的视觉引导线样式，在 label 位置 设置为'outside'的时候会显示视觉引导线。
 				show: true,
@@ -99,8 +110,8 @@
 				length2: 50, // 折线第二段
 				smooth: false, //是否平滑视觉引导线，默认不平滑，可以设置成 true 平滑显示，也可以设置为 0 到 1 的值，表示平滑程度。
 				lineStyle: {
-					color: '#000',
-					width: 1,
+					color: '#fff',
+					width: 2,
 					type: 'solid',
 					opacity: 1,
 				},
@@ -144,19 +155,19 @@
 				},
 				{
 					value: 310, //310
-					name: '邮件营销'
+					name: 'A'
 				},
 				{
 					value: 234, // 234
-					name: '联盟广告'
+					name: 'B'
 				},
 				{
 					value: 135, //135
-					name: '视频广告'
+					name: 'C'
 				},
 				{
 					value: 1548, //1548
-					name: '搜索引擎'
+					name: 'D'
 				}
 			]
 		}]

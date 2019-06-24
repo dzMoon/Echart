@@ -14,11 +14,12 @@
 <script src="js/echarts.min.js"></script>
 
 <script type="text/javascript">
-	var myCharts = echarts.init(document.querySelector("#main"))
+	var myCharts = echarts.init(document.querySelector("#main"),'dark')
 
 	var option = {
 		title: {
-			text: '案例二'
+			text: '案例二',
+			x: 'center',
 		},
 		grid: {
 			show: false
@@ -28,12 +29,43 @@
 			data: [
 				1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 			],
-			boundaryGap: false, 
+			boundaryGap: true, 
+			axisLabel: {
+				fontSize: 20,
+				show: false,
+			},
+			axisLine: {
+				lineStyle: {
+					width: 4,
+				}
+			}
+			
+		},
+		toolbox: {
+			show: true,
+			feature: {
+				saveAsImage: {
+					type: 'png',
+				}
+			}
 		},
 		yAxis: {
 			show: true,
-			splitLine: false,
-			z:3
+			splitLine: true,
+			z:3,
+			axisLine: {
+				lineStyle: {
+					width: 4,
+				}
+			},
+			axisTick: {
+				show: false,
+				interval: 0,
+			},
+			axisLabel: {
+				fontSize: 20,
+				show: false,
+			},
 		},
 		series: [{
 			name: "利率",
@@ -52,17 +84,17 @@
 			hoverAnimation: true, //是否开启 hover 在拐点标志上的提示动画效果。
 			legendHoverLink: true, //是否启用图例 hover 时的联动高亮。
 			cursor: 'pointer', //鼠标悬浮时在图形元素上时鼠标的样式是什么。同 CSS 的 cursor。
-			step: true, // 是否是阶梯线图。可以设置为 true 显示成阶梯线图，也支持设置成 'start', 'middle', 'end' 分别配置在当前点，当前点与下个点的中间点，下个点拐弯。
+			step: false, // 是否是阶梯线图。可以设置为 true 显示成阶梯线图，也支持设置成 'start', 'middle', 'end' 分别配置在当前点，当前点与下个点的中间点，下个点拐弯。
 			label: { //图形上的文本标签，可用于说明图形的一些数据信息，比如值，名称等
 				show: true, //是否显示标签。
 				position: 'middle', //标签的位置。
-				distance: 5, //距离图形元素的距离
+//				distance: 50, //距离图形元素的距离
 				rotate: 0, //标签旋转。
-				offset: [10, 10], //是否对文字进行偏移
+				offset: [0, 30], //是否对文字进行偏移
 				formatter: [
 					'{a| {a}}',
-					'{b| {b}}',
-					'{c| {c}}'
+//					'{b| {b}}',
+//					'{c| {c}}'
 				].join('\n'),
 				//'{a}\n{b}\n{c}\n',
 				/*
@@ -76,16 +108,19 @@
 				color: 'blue', // 字体颜色、大小、
 				align: "center", //文字水平对齐方式，默认自动。
 				verticalAlign: "middle", //文字垂直对齐方式，默认自动。
+				fontSize: 16,
 				rich: { //在 rich 里面，可以自定义富文本样式。利用富文本样式，可以在标签中做出非常丰富的效果。
 					a: {
-						color: 'red',
-						lineHeight: 10
+						color: '#fff',
+						lineHeight: 10,
+						fontSize: 16,
 					},
 					b: {
 						backgroundColor: {
 							image: 'xxx/xxx.jpg'
 						},
-						height: 40
+						height: 40,
+						fontSize: 16,
 					},
 					c: {
 						fontSize: 18,
@@ -110,9 +145,9 @@
 				color: {
 					type: 'linear',
 					x: 0,
-					y: 0,
+					y: 1,
 					x2: 0,
-					y2: 1,
+					y2:0,
 					colorStops: [{
 							offset: 1,
 							color: '#fff'
@@ -154,10 +189,16 @@
 				symbol: 'pin', //标记的图形 'circle', 'rect', 'roundRect', 'triangle', 'diamond', 'pin', 'arrow', 'none'
 				symbolSize: 50,
 				label: { // 标签
-					color: "red"
+					normal: {
+						color: '#000'
+					},
+					emphasis: {
+						color: 'blue'
+					},
+//					color: "#000"
 				},
 				itemStyle: { // 折现该店标志的样式
-					color: 'green'
+					color: '#fff'
 				},
 				emphasis: { //图形的高亮样式。
 					itemStyle: {// 折线拐点标志的样式。 
@@ -176,13 +217,14 @@
 				symbol: ['nonde', 'arrow'], //标线两端的标记类型，可以是一个数组分别指定两端，也可以是单个统一指定
 				symbolSize: 10,
 				label: { // 标签
-					color: '#000',
+					color: '#fff',
 					formatter: '{b}\n{c}',
 					fontSize: 20
 				},
 				lineStyle: { // 折现该店标志的样式  默认样式如果为dotted,dashed,高亮样式不能改为solid  
-					color: '#000',
-					type: 'solid'
+					color: '#fff',
+					type: 'solid',
+					width: 2,
 				},
 				emphasis: { //图形的高亮样式。
 					lineStyle: { //  折线拐点标志的样式。 
@@ -204,7 +246,7 @@
 			},
 
 			data: [
-				5, 6, 8, 2, 4, 3, 7, 6, 5
+				1, 2, 2, 3, 1, 2, 3, 2, 1
 			]
 
 		}]

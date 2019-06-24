@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="main"></div>
+	</body>
+
+</html>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript">
+	var myChart = echarts.init(document.querySelector("#main"), "", {
+		width: 500,
+		height: 500,
+	})
+	var seriesData = {
+		nameList: ['赵', '钱', '孙', '李', '周', '吴', '郑', '王', '冯', '陈', '褚', '卫', '蒋', '沈', '韩', '杨', '朱', '秦', '尤', '许', '何', '吕', '施', '张', '孔', '曹', '严', '华', '金', '魏', '陶', '姜', '戚', '谢', '邹', '喻', '柏'],
+		series: [],
+		selected: {},
+	}
+	for(var i = 0; i < seriesData.nameList.length; i++) {
+		seriesData.series.push(
+			{
+				name: seriesData.nameList[i],
+				value: Math.floor(Math.random()) * 100
+			}
+		);
+		
+//		if (i < 6) {
+			seriesData.selected[seriesData.nameList[i]] = i < 6;
+//		} else {
+//			seriesData.selected[seriesData.nameList[i]] = false;
+//		}
+	}
+
+	var option = {
+		legend: {
+			show: true,
+			selected: seriesData.selected,
+			type: 'scroll',// 'plain'  scroll
+			orient: 'vertical',//vertical  horizontal
+			right: 10,
+			itemGap: 30,
+//			itemWdith: '',
+//			itemHeight: '',
+			selectedMode: 'mutiple', //mutiple  single
+			inactiveColor: '#eee',
+			textStyle: {
+//				fontSize: 20,
+			},
+			borderType: 'solid',
+			borderWidth: 5,
+			borderColor: '#000',
+			borderRadius: 5,
+			scrollDataIndex: 0,
+			pageButtonPosition: 'end',
+			pageButtonGap: 60,
+			pageIconInactiveColor: "#fff",
+			pageTextStyle: {
+				
+			},
+			pageFormatter: '{current}|{total}',  //{current} {total}
+			animation: true, //土里翻页是否使用动画
+			animationDurationUpdate: 1000,
+		},
+		series: [{
+			type: 'pie',
+			data: seriesData.series
+		}]
+	}
+
+	myChart.setOption(option)
+</script>

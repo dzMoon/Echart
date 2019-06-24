@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="main"></div>
+	</body>
+
+</html>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript">
+	var myChart = echarts.init(document.querySelector("#main"), "dark", {
+		width: 500,
+		height: 500,
+	})
+	var option = {
+		xAxis: {
+			show: true,
+			type: 'category', // time value category log
+			position: 'bottom', //bottom | top
+			name: "x轴",
+			nameLocation: 'middle', // start middle|center end
+			offset: 10,
+			nameGap: 20,
+			nameRotate: 10,
+			nameTextStyle: {
+				borderColor: '',
+				borderType: '',
+				borderWidth: '',
+				fontSize: 20,
+				fontWeight: 'bold',
+				padding: 5,
+				color: 'red',
+			},
+			axisLine: {
+				show: true,
+				symbol: ["none", "arrow"], // none| arrow | [none, arrow]
+				symbolSize: 50,
+				symbolOffset: 30,
+				lineStyle: {
+					width: 5,
+					type: 'solid',
+					color: '#fff',
+					opacity: 1,
+				},
+			},
+			axisTick: { //坐标轴刻度相关配置
+				show: true,
+				inside: true, //
+				length: 10,
+				lineStyle: {
+					width: 3,
+					type: 'solid',
+					color: '#fff',
+					opacity: 1,
+				}
+			},
+			splitLine: {
+				show: true,
+				lineStyle: {
+					width: 1,
+					type: 'solid',
+					color: '#fff',
+					opacity: 1,
+				}
+			},
+			axisPointer: {
+				show: false,
+				type: 'shadow', // none, line shadow
+				snap: true, //是否自动吸附到点
+				handle: {
+					show: true,
+					size: 5,
+				}
+			},
+			data: [
+				"周一",
+				"周二",
+				"周三",
+				"周四",
+				"周五",
+			]
+			
+		},
+		yAxis: {
+			min: 300,
+			max: 800,
+		},
+		grid: {
+
+		},
+		series: [{
+			type: 'line',
+			data: [
+				500,600,700,300,400
+//				['2019/01/01', 5], // time ,value
+//				['2019/01/02', 6],
+//				['2019/01/03', 7],
+//				['2019/01/04', 4],
+			]
+		}]
+	}
+
+	myChart.setOption(option)
+</script>

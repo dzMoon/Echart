@@ -14,17 +14,32 @@
 <script type="text/javascript" src="js/echarts.min.js"></script>
 <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
 <script type="text/javascript">
-	var myChart = echarts.init(document.querySelector("#main"));
+	var myChart = echarts.init(document.querySelector("#main"),'dark');
 
 	var option = {
 		xAxis: {
-			data: ['太原', '包头', '深圳', '广州']
+			data: ['太原', '包头', '深圳', '广州'],
+			axisLabel: {
+				show: false,
+			},
+			axisLine: {
+				lineStyle: {
+					width: 3
+				}
+			}
 		},
 		yAxis: {
-
+			axisLabel: {
+				show: false,
+			},
+			axisLine: {
+				lineStyle: {
+					width: 3
+				}
+			}
 		},
 		series: [
-
+			
 			{
 				type: 'effectScatter', //带有涟漪特效动画的散点（气泡）图
 				name: '气泡图',
@@ -54,8 +69,12 @@
 				symbolKeepAspect: false, //如果 symbol 是 path:// 的形式，是否在缩放时保持该图形的长宽比。
 				symbolOffset: [50, 50], //标记相对于原本位置的偏移
 				cursor: 'pointer',
-				label: {},
-				itemStyle: {},
+				label: {
+				
+				},
+				itemStyle:{
+					color: '#fff',
+				},
 				emphasis: {},
 				data: [{
 					name: '太原',
@@ -72,12 +91,14 @@
 				},{
 					name: '包头',
 					value: 2,
+					symbol: 'pin',
 				},{
 					name: '深圳',
 					value: 3,
 				},{
 					name: '广州',
 					value: 4,
+					symbol: 'diamond'
 				}],
 				zlevel: 0,
 				z: 2,

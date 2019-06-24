@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="main"></div>
+	</body>
+</html>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<script type="text/javascript">
+	var myChart = echarts.init(document.querySelector("#main"),'dark',{
+		width: 500,
+		height: 500,
+		
+	})
+	var option = {
+		visualMap: {
+//			type: 'continuous', //连续型
+//			min: 0,
+//			max: 100,
+//			calculable: true,
+//			range: [0,50],
+//			itemWidth: '',
+//			itemHeight: '',
+//			text: ['正常','严重'],
+//			textGap: 20,
+//			textStyle: {
+//				
+//			},
+//			hoverLink: true,
+//			inRange: {
+//				color: ['green','yellow','red'],
+//			}
+
+			type: 'piecewise', //分段型
+			splitNumber: 4,
+			min: 0,
+			max: 100,
+//			categories: [],
+			itemGap: 50,
+			showLabel: false,
+			selectedMode: 'single',
+			orient: 'horizontal',
+		},
+		series: [
+			{
+				type: 'map',
+				map: 'china',
+				data: [
+					{
+						name: '广东',
+						value: 99
+					},
+					{
+						name: '新疆',
+						value: 2
+					},
+					{
+						name: '内蒙古',
+						value: 10
+					},
+					{
+						name: '西藏',
+						value: 15
+					},
+					{
+						name: '山西',
+						value: 55
+					},
+				
+				]
+			}
+		]
+	}
+	myChart.setOption(option)
+	
+</script>

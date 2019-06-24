@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="main" style="width:500px;height:500px"></div>
+	</body>
+</html>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript">
+	var myChart = echarts.init(document.querySelector("#main"));
+	
+	var option = {
+		legend: {
+			
+		},
+		series: [
+			{
+				type: 'pie',
+				legendHoverLink: true,
+				hoverAnimation: true,
+				hoverOffset: 20,
+				selectedMode: 'single',
+				selectedOffset: 20,
+				startAngle: 0,
+				clockwise: false,
+				minAngle: 0,
+				roseType: 'area', //圆心角相同，只比较半径
+//				roseType: 'radius', //圆心角相同，只比较半径
+				stillShowZeroSum: true,
+				label: {
+					show: true,
+					position: 'outside'
+				},
+				labelLine: {
+					length: 50,
+					length2: 50,
+					smooth: true,
+				},
+				itemStyle: {
+					
+				},
+				radius: 100,
+				data: [
+					{
+						name: '小米',
+						value: 3000
+					},{
+						name: '华为',
+						value: 4000
+					},{
+						name: '三星',
+						value: 4500
+					},{
+						name: '苹果',
+						value: 5000
+					},
+//					{
+//						name: '锤子',
+//						value: 2
+//					},
+				]
+			}
+
+		]
+	}
+	
+	myChart.setOption(option)
+</script>

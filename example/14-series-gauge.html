@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="main"></div>
+	</body>
+</html>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript">
+	var myChart = echarts.init(document.querySelector("#main"), "dark", {
+		width: 500,
+		height: 500,
+	})
+	var option = {
+		series: [{
+			type: 'gauge',
+			radius: 200,
+			startAngle: 225,
+			endAngle: -45,
+			colckwise: true,
+			min: 0,
+			max: 200,
+			splitNumber: 10,
+			axisLine: {
+				show: true,
+				lineStyle: {
+					color: [
+						[0.1,'green'],
+						[0.9, 'blue'],
+						[1,'red'],
+					],
+					width: 8,
+					shadowColor: '#fff',
+					shadowBlur: 8,
+				}
+			},
+			axisLabel: {
+				color: '#fff',
+				fontSize: 12,
+				fontWeight: 'bold',
+				distance: 10,
+			},
+			axisTick: {
+				show: true,
+				splitNumber: 5,
+				length: 15,
+				lineStyle: {
+					color: 'auto',
+					shadowColor: '#fff',
+					shadowBlur: 5,
+				}
+				
+			},
+			splitLine: {
+				show: true,
+				length: 25,
+				lineStyle: {
+					width: 3,
+					color: 'auto',
+					shadowColor: '#fff',
+					shadowBlur: 5,
+				}
+			},
+			pointer: {
+				show: true,
+				length: '70%',
+				width: 10,
+			},
+			itemStyle: {
+				color: 'auto',
+				shadowBlur: 5,
+				shadowColor: '#fff',
+			},
+			detail: {
+				backgroundColor: 'rgba(30,144,255,.8)',
+				borderWidth: 1,
+				borderColor: '#fff',
+				shadowBlur: 5,
+				shadowColor: '#fff',
+				offsetCenter: [0, '40%']
+			},
+			title: {
+				color: '#fff',
+				offsetCenter: [0, '-40%'],
+				shadowBlur: 5,
+				shadowColor: '#fff',
+			},
+			data: [
+				{
+					name: 'km/h',
+					value: 18,
+				}
+			]
+		}]
+	}
+	
+	
+	myChart.setOption(option)
+</script>

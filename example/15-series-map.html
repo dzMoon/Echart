@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="main"></div>
+	</body>
+</html>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+<script type="text/javascript">
+	var myChart = echarts.init(document.querySelector("#main"),'dark',{
+		width: 500,
+		height: 500,
+		
+	})
+	var option = {
+		legend: {
+			
+		},
+		series: [
+			{
+				name: '数据',
+				type: 'map',
+				map: 'china',
+				roam: false,
+				scaleLimit: {
+					max: 2,
+					min: 0.5,
+				},
+				selectedMode: 'multiple',
+				label: {
+					show: true,
+					position: 'bottom',
+					distance: 20,
+					offset: [-10,-10],
+					formatter: '{b}',
+				},
+				itemStyle: {
+					areaColor: '#eee',
+					borderColor: '#000',
+					shadowColor: '#000',
+					shadowBlur: 10,
+				},
+				
+				layoutCenter: ['50%','50%'],
+				layoutSize: '50%',
+				showLegendSymbol: false,
+				data: [
+					{
+						name: '新疆',
+						value: 500,
+					}
+				]
+			}
+		]
+	}
+	myChart.setOption(option)
+	
+</script>

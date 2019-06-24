@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="main"></div>
+	</body>
+</html>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript">
+	var myChart = echarts.init(document.querySelector("#main"), "dark", {
+		width: 500,
+		height: 500,
+	})
+	var option = {
+		legend: {
+			
+		},
+		xAxis: {
+			
+		},
+		yAxis: {
+			
+		},
+		series: [{
+			name: '动态气泡图',
+			legendHoverLink: true,
+			type: 'effectScatter',
+			showEffctOn: 'emphasis',// render emphasis
+			coordinateSystem: 'cartesian2d', // geo polar
+			effctType: 'ripple', //涟漪
+			rippleEffect: {
+				period: 4,
+				scale: 6,
+				brushType: 'fill', // fill  stroke
+			},
+			label: {
+				norml: {
+					
+				},
+				emphasis: {
+					
+				}
+			},
+			itemStyle: {
+				color: 'blue',
+			},
+			emphasis: {
+				
+			},
+			symbol: 'pin',
+//			symbolSize: '',
+//			simbolRoate: '',
+			data: [5,6,7,2,4,8,5]
+		}]
+	}
+	
+	
+	myChart.setOption(option)
+</script>

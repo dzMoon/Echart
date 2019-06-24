@@ -41,95 +41,130 @@ for (var i = 0; i < 20; i++) {
 
 // option
 option = {
-    backgroundColor: '#0f375f',
+    title: {
+        text: '动态数据',
+        subtext: '纯属虚构'
+    },
     tooltip: {
         trigger: 'axis',
         axisPointer: {
-            type: 'shadow'
+            type: 'cross',
+            label: {
+                backgroundColor: '#283b56'
+            }
         }
     },
     legend: {
-        data: ['line', 'bar'],
-        textStyle: {
-            color: '#ccc'
+        data:['最新成交价', '预购队列']
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            dataView: {readOnly: false},
+            restore: {},
+            saveAsImage: {}
         }
     },
-    xAxis: {
-        data: category,
-        axisLine: {
-            lineStyle: {
-                color: '#ccc'
-            }
-        }
+    dataZoom: {
+        show: false,
+        start: 0,
+        end: 100
     },
-    yAxis: {
-        splitLine: {show: false},
-        axisLine: {
-            lineStyle: {
-                color: '#ccc'
-            }
+    xAxis: [
+        {
+            type: 'category',
+            boundaryGap: true,
+            data: (function (){
+                var now = new Date();
+                var res = [];
+                var len = 10;
+                while (len--) {
+                    res.unshift(now.toLocaleTimeString().replace(/^\D*/,''));
+                    now = new Date(now - 2000);
+                }
+                return res;
+            })()
+        },
+        {
+            type: 'category',
+            boundaryGap: true,
+            data: (function (){
+                var res = [];
+                var len = 10;
+                while (len--) {
+                    res.push(10 - len - 1);
+                }
+                return res;
+            })()
         }
-    },
-    series: [{
-        name: 'line',
-        type: 'line',
-        smooth: true,
-        showAllSymbol: true,
-        symbol: 'emptyCircle',
-        symbolSize: 15,
-        data: lineData
-    }, {
-        name: 'bar',
-        type: 'bar',
-        barWidth: 10,
-        itemStyle: {
-            normal: {
-                barBorderRadius: 5,
-                color: new echarts.graphic.LinearGradient(
-                    0, 0, 0, 1,
-                    [
-                        {offset: 0, color: '#14c8d4'},
-                        {offset: 1, color: '#43eec6'}
-                    ]
-                )
-            }
+    ],
+    yAxis: [
+        {
+            type: 'value',
+            scale: true,
+            name: '价格',
+            max: 30,
+            min: 0,
+            boundaryGap: [0.2, 0.2]
         },
-        data: barData
-    }, {
-        name: 'line',
-        type: 'bar',
-        barGap: '-100%',
-        barWidth: 10,
-        itemStyle: {
-            normal: {
-                color: new echarts.graphic.LinearGradient(
-                    0, 0, 0, 1,
-                    [
-                        {offset: 0, color: 'rgba(20,200,212,0.5)'},
-                        {offset: 0.2, color: 'rgba(20,200,212,0.2)'},
-                        {offset: 1, color: 'rgba(20,200,212,0)'}
-                    ]
-                )
-            }
+        {
+            type: 'value',
+            scale: true,
+            name: '预购量',
+            max: 1200,
+            min: 0,
+            boundaryGap: [0.2, 0.2]
+        }
+    ],
+    series: [
+        {
+            name:'预购队列',
+            type:'bar',
+            xAxisIndex: 1,
+            yAxisIndex: 1,
+            data:(function (){
+                var res = [];
+                var len = 10;
+                while (len--) {
+                    res.push(Math.round(Math.random() * 1000));
+                }
+                return res;
+            })()
         },
-        z: -12,
-        data: lineData
-    }, {
-        name: 'dotted',
-        type: 'pictorialBar',
-        symbol: 'rect',
-        itemStyle: {
-            normal: {
-                color: '#0f375f'
-            }
-        },
-        symbolRepeat: true,
-        symbolSize: [12, 4],
-        symbolMargin: 1,
-        z: -10,
-        data: lineData
-    }]
-};;
+        {
+            name:'最新成交价',
+            type:'line',
+            data:(function (){
+                var res = [];
+                var len = 0;
+                while (len < 10) {
+                    res.push((Math.random()*10 + 5).toFixed(1) - 0);
+                    len++;
+                }
+                return res;
+            })()
+        }
+    ]
+};
+
+app.count = 11;
+setInterval(function (){
+    axisData = (new Date()).toLocaleTimeString().replace(/^\D*/,'');
+
+    var data0 = option.series[0].data;
+    var data1 = option.series[1].data;
+    data0.shift();
+    data0.push(Math.round(Math.random() * 1000));
+    data1.shift();
+    data1.push((Math.random() * 10 + 5).toFixed(1) - 0);
+
+    option.xAxis[0].data.shift();
+    option.xAxis[0].data.push(axisData);
+    option.xAxis[1].data.shift();
+    option.xAxis[1].data.push(app.count++);
+
+    myChart.setOption(option);
+}, 2100);
 if (option && typeof option === "object") {
     myChart.setOption(option, true);
 }

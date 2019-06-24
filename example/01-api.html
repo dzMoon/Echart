@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="main" style="width:500px;height:500px"></div>
+	</body>
+</html>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript">
+	//主题 default  lingter  dark
+	var myCharts = echarts.init(document.querySelector("#main"),"dark",{
+		devicePixelRation: window.devicePixelRation,
+		width: 500,
+		height: 500,
+		render: 'canvas',  //'svg'
+		
+	}); 
+	myCharts.setOption({}) // notMerge  lazyUpdate 
+</script>

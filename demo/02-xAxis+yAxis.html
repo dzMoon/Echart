@@ -55,7 +55,9 @@
 			max: function(value) { //坐标轴刻度最大值。类目轴 0,1,2代表 类1 类2 类3
 				return 5;
 			}, // 坐标轴刻度最大值。
-
+			axisLabel: {
+				color: 'yellow'
+			},
 			minInterval: 0, //自动计算的坐标轴最小间隔大小。例如可以设置成1保证坐标轴分割刻度显示成整数。只在数值轴或时间轴中（type: 'value' 或 'time'）有效。
 			maxInterval: 10, // 自动计算的坐标轴最大间隔大小。 例如，在时间轴（（type: 'time'））可以设置成 3600 * 24 * 1000 保证坐标轴分割刻度最大为一天。 只在数值轴或时间轴中（type: 'value' 或 'time'）有效。
 			axisLine: { //坐标轴线 

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="main"></div>
+	</body>
+</html>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript">
+	var myChart = echarts.init(document.querySelector("#main"), "dark", {
+		width: 500,
+		height: 500,
+	})
+	var option = {
+		title: {
+			text: '数据视图'
+		},
+		xAxis: {
+			type: 'category',
+			data: [
+				'a','b','c','d','e','f'
+			]
+		},
+		yAxis: {
+			
+		},
+		toolbox: {
+			show: true,
+			orient: 'horizontal', // vertical horizontal
+			itemSize: 15,
+			itemGap: 10,
+			top: 20,
+			showTitle: true,
+			iconStyle: {
+
+				textPosition: 'top',
+
+			},
+			emphasis: {
+				iconStyle:  {
+					textPosition: 'top',
+					borderColor: '#fff',
+					borderWidth: 3,
+					borderType: 'solid',
+				}
+			},
+			feature: {
+				dataZoom: {
+					show: true,
+					title: {
+						
+						zoom: '数据区域缩放1',
+						back: '区域缩放还原1',
+					}
+				},
+				dataView: {
+					title: '数据视图1',
+					readOnly: false,
+					lang: ['数据视图','关闭1','刷新1'],
+					backgroundColor: 'blue',
+					textareaColor: 'yellow',
+					buttonColor: 'red',
+					buttonTextColor: '#fff',
+				},
+				magicType: {
+					type: ['line','bar','stack','tiled'],
+					title: {
+						line: '',
+						bar: '',
+						stack: '',
+						tiled: ''
+					}
+				},
+				restore:{
+					title: '还原1'
+				},
+				saveAsImage: {
+					type: 'jpeg',//jpeg png
+					title: '保存为图片',
+					excludeComponents: ['toolbox'],
+//					name: '111',
+				}
+			}
+		},
+		series: [{
+			name: '数据',
+			type: 'line',
+			data: [5,6,7,2]
+		},{
+			name: '数据2',
+			type: 'line',
+			data: [6,5,4,2]
+		}]
+	}
+	
+	
+	myChart.setOption(option)
+</script>

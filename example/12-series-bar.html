@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="main" style="width:500px;height:500px"></div>
+	</body>
+</html>
+<script src="js/echarts.min.js"></script>
+<script type="text/javascript">
+	var myChart = echarts.init(document.querySelector("#main"));
+	
+	var option = {
+		xAxis: {
+			type: 'category',
+			data: [
+				"1月",
+				"2月",
+				"3月",
+				"4月",
+				"5月",
+				"6月",
+				"7月",
+				"8月",
+				"9月",
+			]
+		
+		},
+		yAxis: {
+			
+		},
+		legend: {
+			
+		},
+		series: [
+			{
+				type: 'bar',
+				name: '数据1',
+				barWidth: 10,
+//				barCategoryGap:30, 
+				legendHoverLink: true,
+				label: {
+					show: true,
+					position: 'insidetop', //inside   insideBottom 
+				},
+				itemStyle: {
+					borderColor: '#000',
+					borderWidth: 2,
+					borderType: 'solid',
+					shadowColor: '#fff',
+					shadowBlur: 5,
+				},
+				emphasis: {
+					
+				},
+				barGap: 1,
+				barMinHeight: 10,
+				barMaxWidth: 20,
+				cursor: 'wait',
+				data: [
+					5,6,4,2,7,9,8
+				]
+			},
+			{
+				type: 'bar',
+				name: '数据2',
+				barWidth: 10,
+				barGap: 1,
+//				barCategoryGap:30, 
+				data: [
+					4,6,3,2,6,7,5
+				]
+			}
+		]
+	}
+	
+	myChart.setOption(option)
+</script>
